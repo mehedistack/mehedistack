@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Mehedi Hasan - Full Stack .NET Developer from Bangladesh">
+    <title>Mehedi Hasan | Full Stack .NET Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config for Dark Mode -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#6366f1', // Indigo 500
+                            DEFAULT: '#4f46e5', // Indigo 600
+                            dark: '#4338ca', // Indigo 700
+                        },
+                        dotnet: '#512bd4',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom styles for transitions */
+        body {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Hide scrollbar for modal content but allow scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Video Object Fit */
+        .video-cover {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <!-- Dark Mode Logic -->
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100 font-sans antialiased relative">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 dark:bg-slate-900/90 backdrop-blur-md border-b border-gray-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold tracking-tighter">
+                        <span class="text-brand">Mehedi</span><span class="text-slate-700 dark:text-white">.Dev</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-6">
+                        <a href="#home" class="hover:text-brand px-3 py-2 rounded-md text-sm font-medium transition">Home</a>
+                        <a href="#about" class="hover:text-brand px-3 py-2 rounded-md text-sm font-medium transition">About</a>
+                        <a href="#skills" class="hover:text-brand px-3 py-2 rounded-md text-sm font-medium transition">Stack</a>
+                        <a href="#portfolio" class="hover:text-brand px-3 py-2 rounded-md text-sm font-medium transition">Portfolio</a>
+                        <a href="#services" class="hover:text-brand px-3 py-2 rounded-md text-sm font-medium transition">Services</a>
+                        
+                        <!-- Theme Toggle Button -->
+                        <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition focus:outline-none">
+                            <i id="theme-icon" class="fas fa-moon text-slate-600 dark:text-yellow-300 text-lg"></i>
+                        </button>
+
+                        <a href="#contact" class="bg-brand hover:bg-brand-dark px-5 py-2 rounded-full text-sm font-bold transition text-white shadow-lg shadow-brand/30">
+                            Hire Me
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="-mr-2 flex md:hidden items-center space-x-4">
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition focus:outline-none">
+                        <i id="theme-icon-mobile" class="fas fa-moon text-slate-600 dark:text-yellow-300 text-lg"></i>
+                    </button>
+                    
+                    <button type="button" onclick="toggleMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-slate-500 dark:text-slate-400 hover:text-brand focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white dark:bg-slate-800 shadow-lg" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-slate-700">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-slate-700">About</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-slate-700">Tech Stack</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-slate-700">Portfolio</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-slate-700">Services</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-bold text-brand hover:bg-gray-100 dark:hover:bg-slate-700">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0 text-center lg:text-left">
+                    <div class="inline-flex items-center px-3 py-1 rounded-full border border-brand/30 bg-brand/10 text-brand text-sm font-medium mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2 animate-pulse"></span> Open to Work
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white">
+                        Hi, I'm <span class="text-brand">Mehedi Hasan</span>
+                    </h1>
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-slate-600 dark:text-slate-300">
+                        Full Stack <span class="text-dotnet">.NET</span> Developer
+                    </h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        I build scalable web applications and cloud solutions. With 5+ years of experience in C#, React, Angular, and Azure, I deliver enterprise-grade quality from Bangladesh to the world.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="inline-flex justify-center items-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-brand hover:bg-brand-dark transition shadow-lg shadow-brand/25">
+                            Hire Me Now
+                        </a>
+                        <a href="https://profileofmehedi.github.io" target="_blank" class="inline-flex justify-center items-center px-8 py-3 border border-slate-300 dark:border-slate-600 text-base font-medium rounded-lg text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 transition">
+                            <i class="fas fa-file-alt mr-2"></i> View Resume
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8 flex items-center justify-center lg:justify-start space-x-6 text-slate-500 dark:text-slate-400">
+                        <span class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-brand"></i> Bangladesh</span>
+                        <span class="flex items-center"><i class="fas fa-briefcase mr-2 text-brand"></i> 5+ Years Exp</span>
+                    </div>
+                </div>
+                
+                <div class="relative max-w-md mx-auto lg:max-w-full">
+                    <div class="absolute -top-10 -right-10 w-72 h-72 bg-brand/20 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-normal"></div>
+                    <div class="absolute -bottom-10 -left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-normal"></div>
+                    
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 transform rotate-2 hover:rotate-0 transition duration-500">
+                        <div class="flex items-center px-4 py-2 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+                            <div class="flex space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="ml-4 text-xs text-slate-400">MehediHasan.cs</div>
+                        </div>
+                        <div class="p-6 overflow-x-auto">
+                            <pre class="text-sm font-mono leading-relaxed text-slate-800 dark:text-slate-300">
+<span class="text-blue-600 dark:text-blue-400">public class</span> <span class="text-yellow-600 dark:text-yellow-300">Developer</span> 
+{
+    <span class="text-blue-600 dark:text-blue-400">public string</span> Name { <span class="text-blue-600 dark:text-blue-400">get</span>; } = <span class="text-green-600 dark:text-green-400">"Mehedi Hasan"</span>;
+    <span class="text-blue-600 dark:text-blue-400">public string</span> Role { <span class="text-blue-600 dark:text-blue-400">get</span>; } = <span class="text-green-600 dark:text-green-400">"Full Stack Architect"</span>;
+    <span class="text-blue-600 dark:text-blue-400">public string[]</span> Skills = {
+        <span class="text-green-600 dark:text-green-400">".NET Core"</span>, 
+        <span class="text-green-600 dark:text-green-400">"React/Angular"</span>, 
+        <span class="text-green-600 dark:text-green-400">"Azure/AWS"</span>
+    };
+}
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-white dark:bg-slate-800/50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Technical Expertise</h2>
+                <p class="mt-4 text-slate-600 dark:text-slate-400">A complete toolset for modern web development.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- .NET -->
+                <div class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-xl hover:shadow-lg transition duration-300 group">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-700 rounded-lg flex items-center justify-center mb-4 text-dotnet text-3xl shadow-sm group-hover:scale-110 transition">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">.NET & C#</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">ASP.NET Core, WebAPI, MVC, Entity Framework.</p>
+                </div>
+                <!-- Frontend -->
+                <div class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-xl hover:shadow-lg transition duration-300 group">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-700 rounded-lg flex items-center justify-center mb-4 text-blue-500 text-3xl shadow-sm group-hover:scale-110 transition">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">React & Angular</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">TypeScript, Redux, Tailwind CSS, Bootstrap.</p>
+                </div>
+                <!-- Cloud -->
+                <div class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-xl hover:shadow-lg transition duration-300 group">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-700 rounded-lg flex items-center justify-center mb-4 text-orange-500 text-3xl shadow-sm group-hover:scale-110 transition">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">Azure & AWS</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Cloud Functions, Docker, CI/CD, Storage.</p>
+                </div>
+                <!-- Database/Other -->
+                <div class="bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 rounded-xl hover:shadow-lg transition duration-300 group">
+                    <div class="w-12 h-12 bg-white dark:bg-slate-700 rounded-lg flex items-center justify-center mb-4 text-yellow-500 text-3xl shadow-sm group-hover:scale-110 transition">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 dark:text-white mb-2">SQL & Python</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">SQL Server, Python Scripts, Data Optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-20 bg-gray-50 dark:bg-slate-900 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Featured Projects</h2>
+                <p class="mt-4 text-slate-600 dark:text-slate-400">Check out my recent work. Click on a project for details.</p>
+            </div>
+
+            <!-- Dynamic Project Grid -->
+            <div id="project-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white dark:bg-slate-800/50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Services</h2>
+                <p class="mt-4 text-slate-600 dark:text-slate-400">Specialized services for startups and enterprises.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-gray-200 dark:border-slate-700 shadow-lg hover:-translate-y-2 transition duration-300">
+                    <i class="fas fa-laptop-code text-3xl text-brand mb-4"></i>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Custom Web Development</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">
+                        High-performance .NET Core backends with React/Angular frontends.
+                    </p>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-gray-200 dark:border-slate-700 shadow-lg hover:-translate-y-2 transition duration-300">
+                    <i class="fas fa-server text-3xl text-brand mb-4"></i>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">API Design & Integration</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">
+                        RESTful APIs, Microservices, and third-party integrations (Stripe, Twilio).
+                    </p>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-gray-50 dark:bg-slate-800 rounded-2xl p-8 border border-gray-200 dark:border-slate-700 shadow-lg hover:-translate-y-2 transition duration-300">
+                    <i class="fas fa-bug text-3xl text-brand mb-4"></i>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Bug Fixing</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">
+                        Fast troubleshooting, code refactoring, and performance optimization.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hire Me / CTA Section -->
+    <section id="contact" class="py-24 bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl mb-6">Let's Work Together</h2>
+            <p class="text-xl text-slate-600 dark:text-slate-400 mb-10">
+                I am available for freelance projects. Whether you need a full application built from scratch or need help with a complex bug, I am here to assist.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <!-- Upwork Button -->
+                <a href="https://www.upwork.com/freelancers/~017323df3fc589f2e2" target="_blank" class="group flex items-center justify-center px-8 py-4 bg-[#14a800] hover:bg-[#108a00] text-white rounded-lg text-lg font-bold transition transform hover:-translate-y-1 shadow-lg shadow-green-600/20">
+                    <div class="bg-white rounded-full p-1 mr-3">
+                        <svg class="w-4 h-4 text-[#14a800]" viewBox="0 0 24 24" fill="currentColor"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.14c-2.539 0-4.51 1.649-5.31 4.366-1.22-1.834-2.148-4.036-2.687-5.892H7.816v6.105c0 2.455-1.996 4.451-4.451 4.451-2.455 0-4.451-1.996-4.451-4.451V3.492H0v6.105c0 4.323 3.515 7.838 7.838 7.838 4.323 0 7.838-3.515 7.838-7.838v-6.03c.74 2.56 2.053 5.378 3.868 7.39l-1.637 7.647h3.44l1.455-6.797C23.549 11.231 24 10.435 24 9.496c0-3.321-2.679-6.004-6.004-6.004v0z"/></svg>
+                    </div>
+                    Hire on Upwork
+                </a>
+                
+                <!-- Fiverr Button -->
+                <a href="https://www.fiverr.com/mehedi9339" target="_blank" class="group flex items-center justify-center px-8 py-4 bg-[#1dbf73] hover:bg-[#19a463] text-white rounded-lg text-lg font-bold transition transform hover:-translate-y-1 shadow-lg shadow-green-500/20">
+                   <span class="font-serif italic font-black mr-2 text-xl">fi</span> Order on Fiverr
+                </a>
+            </div>
+
+            <div class="mt-12 flex justify-center space-x-8">
+                <!-- LINKEDIN -->
+                <a href="https://www.linkedin.com/in/mehedi9339/" target="_blank" class="text-slate-400 hover:text-brand transition transform hover:scale-110">
+                    <i class="fab fa-linkedin text-3xl"></i>
+                </a>
+                <!-- GITHUB -->
+                <a href="https://github.com/mehedihasan9339" target="_blank" class="text-slate-400 hover:text-brand transition transform hover:scale-110">
+                    <i class="fab fa-github text-3xl"></i>
+                </a>
+                <!-- EMAIL -->
+                <a href="mailto:mehedihasan9339@gmail.com" class="text-slate-400 hover:text-brand transition transform hover:scale-110">
+                    <i class="fas fa-envelope text-3xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 py-8 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-500 text-sm mb-2">
+                &copy; 2026 Mehedi Hasan. All rights reserved.
+            </p>
+            <p class="text-slate-400 text-xs">
+                Proudly designed in <span class="text-green-600 dark:text-green-500 font-bold">Bangladesh</span> 🇧🇩
+            </p>
+        </div>
+    </footer>
+
+    <!-- MODAL (Hidden by default) -->
+    <div id="project-modal" class="fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+
+        <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+            <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-800 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl border border-gray-200 dark:border-slate-700">
+                
+                <!-- Close Button -->
+                <button type="button" onclick="closeModal()" class="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <!-- Modal Content -->
+                <div class="px-6 py-6 sm:px-10 sm:py-10">
+                    <h3 id="modal-title" class="text-2xl font-bold leading-6 text-slate-900 dark:text-white mb-2">Project Title</h3>
+                    <div id="modal-tech" class="flex flex-wrap gap-2 mb-6"></div>
+                    
+                    <!-- Media Area (Populated by JS) -->
+                    <div id="modal-media" class="space-y-4 mb-6">
+                        <!-- Images/Video will go here -->
+                    </div>
+
+                    <p id="modal-desc" class="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-8">
+                        Description goes here...
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a id="modal-github" href="#" target="_blank" class="flex-1 inline-flex justify-center items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-slate-900 hover:bg-slate-700 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 transition">
+                            <i class="fab fa-github mr-2"></i> View Code
+                        </a>
+                        <button onclick="closeModal()" class="flex-1 inline-flex justify-center items-center px-6 py-3 border border-gray-300 dark:border-slate-600 rounded-lg shadow-sm text-base font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 transition">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // ==========================
+        // 1. DATA: Your Projects
+        // ==========================
+        const projectsData = [
+            {
+                id: 1,
+                title: "Aspnet Core 8 Rest API",
+                description: "A robust and scalable Rest API built with the latest .NET 8 framework. Features include clean architecture, JWT authentication, role-based authorization, and optimized SQL Server database interactions. This project demonstrates high-performance API design patterns suitable for enterprise solutions.",
+                tech: [".NET 8", "SQL Server", "Entity Framework", "Web API"],
+                type: "video",
+                // Placeholder Video for Demo (Replace src with your own video URL if you host it, or use an image)
+                thumbnailSrc: "api.mp4", 
+                githubLink: "https://github.com/mehedihasan9339/NexusIdentity",
+                // Extra images for the modal view
+                images: [
+                    "develop-a-secure-asp-net-core-8-rest-api.png?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+                    "develop-a-secure-asp-net-core-8-rest-api (1).png?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                ]
+            },
+            // Add more projects here easily:
+            /*
+            {
+                id: 2,
+                title: "E-Commerce System",
+                description: "...",
+                tech: ["React", "Stripe", ".NET"],
+                type: "image",
+                thumbnailSrc: "path/to/image.jpg",
+                githubLink: "...",
+                images: ["..."]
+            }
+            */
+        ];
+
+        // ==========================
+        // 2. RENDER PROJECTS
+        // ==========================
+        const grid = document.getElementById('project-grid');
+
+        projectsData.forEach(project => {
+            const card = document.createElement('div');
+            card.className = "group relative rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 shadow-md cursor-pointer";
+            card.onclick = () => openModal(project.id);
+
+            // Thumbnail Logic (Video vs Image)
+            let mediaHtml = '';
+            if(project.type === 'video') {
+                mediaHtml = `
+                    <video class="video-cover w-full h-48 sm:h-56" autoplay muted loop playsinline poster="https://via.placeholder.com/600x400?text=Loading+Video...">
+                        <source src="${project.thumbnailSrc}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+            } else {
+                mediaHtml = `<img src="${project.thumbnailSrc}" alt="${project.title}" class="w-full h-48 sm:h-56 object-cover transition transform group-hover:scale-105 duration-500">`;
+            }
+
+            card.innerHTML = `
+                <div class="relative">
+                    ${mediaHtml}
+                    <!-- Overlay -->
+                    <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="text-white font-bold px-4 py-2 border border-white rounded-full">View Details</span>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex flex-wrap gap-2 mb-2">
+                        ${project.tech.map(t => `<span class="text-xs font-semibold px-2 py-1 rounded bg-brand/10 text-brand dark:bg-brand/20 dark:text-brand-light">${t}</span>`).join('')}
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">${project.title}</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">${project.description}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // ==========================
+        // 3. MODAL LOGIC
+        // ==========================
+        const modal = document.getElementById('project-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-desc');
+        const modalTech = document.getElementById('modal-tech');
+        const modalMedia = document.getElementById('modal-media');
+        const modalGithub = document.getElementById('modal-github');
+
+        function openModal(id) {
+            const project = projectsData.find(p => p.id === id);
+            if(!project) return;
+
+            // Populate Text
+            modalTitle.innerText = project.title;
+            modalDesc.innerText = project.description;
+            modalGithub.href = project.githubLink;
+
+            // Populate Tech Tags
+            modalTech.innerHTML = project.tech.map(t => 
+                `<span class="text-xs font-semibold px-2 py-1 rounded bg-slate-200 text-slate-800 dark:bg-slate-700 dark:text-white">${t}</span>`
+            ).join('');
+
+            // Populate Media (Video/Image Main + Extra Images)
+            let contentHtml = '';
+            
+            // Add Main Video or Image
+            if(project.type === 'video') {
+                contentHtml += `
+                    <div class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <video class="w-full" controls autoplay muted>
+                            <source src="${project.thumbnailSrc}" type="video/mp4">
+                        </video>
+                    </div>`;
+            } else {
+                 contentHtml += `
+                    <div class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <img src="${project.thumbnailSrc}" class="w-full h-auto">
+                    </div>`;
+            }
+
+            // Add Extra Images from Gallery
+            if(project.images && project.images.length > 0) {
+                contentHtml += `<div class="grid grid-cols-2 gap-2 mt-4">`;
+                project.images.forEach(img => {
+                    contentHtml += `<img src="${img}" class="rounded-lg border border-slate-200 dark:border-slate-700 h-32 w-full object-cover">`;
+                });
+                contentHtml += `</div>`;
+            }
+
+            modalMedia.innerHTML = contentHtml;
+
+            // Show Modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Stop background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+            // Stop video playing when closed
+            modalMedia.innerHTML = ''; 
+        }
+
+        // ==========================
+        // 4. GENERAL UI LOGIC
+        // ==========================
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+        
+        function updateIcon() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const iconClass = isDark ? 'fa-sun' : 'fa-moon';
+            const iconColor = isDark ? 'text-yellow-300' : 'text-slate-600';
+            
+            document.getElementById('theme-icon').className = `fas ${iconClass} ${iconColor} text-lg`;
+            document.getElementById('theme-icon-mobile').className = `fas ${iconClass} ${iconColor} text-lg`;
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+            updateIcon();
+        }
+
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleMobileBtn.addEventListener('click', toggleTheme);
+        updateIcon();
+    </script>
+</body>
+</html>
